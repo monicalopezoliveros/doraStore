@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: 1
+  shipping_address_id: 1
+  order_date: 2024-11-15 20:29:31
+  notes: MyText
+
+two:
+  customer_id: 1
+  shipping_address_id: 1
+  order_date: 2024-11-15 20:29:31
+  notes: MyText
