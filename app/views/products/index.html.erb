@@ -1,11 +1,11 @@
-<h1>Productos</h1>
+<h1>Products</h1>
 
 <div class="products-list">
   <% @products.each do |product| %>
     <div class="product-card">
       <h2><%= link_to product.name, product_path(product) %></h2>
-      <p>Categoría: <%= product.category.name %></p>
-      <p>Precio: $<%= product.price %></p>
+      <p>Category: <%= product.category.name %></p>
+      <p>Price: $<%= product.price %></p>
       <% if product.image.attached? %>
         <%= image_tag product.image, alt: product.name, class: "product-image" %>
       <% else %>

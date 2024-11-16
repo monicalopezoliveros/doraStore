@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to products_path, alert: "El producto que buscas no existe."
+    redirect_to products_path, alert: "The product you are looking for does not exist."
   end
+
 end
