@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    @products = Product.includes(:category).order(created_at: :desc).page(params[:page]).per(3)
+    # @products = Product.all
     #busca deacuerdo a una condicion que esta en onsale
     # @products = Product.includes(:category).where(status_flag: :On_sale).order(created_at: :desc)
   end

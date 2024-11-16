@@ -33,6 +33,8 @@ gem "activeadmin", "~> 2.11", ">= 2.11.1"
 
 gem "sassc-rails"
 
+gem "kaminari"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
