@@ -18,13 +18,4 @@ ActiveAdmin.register Customer do
     f.actions
   end
 
-
 end
-# index do
-#   selectable_column
-#   column :id
-#   column :first_name
-#   column :last_name
-#   column :orders # Esto fallará si no existe la relación o el modelo Order
-#   actions
-# end
