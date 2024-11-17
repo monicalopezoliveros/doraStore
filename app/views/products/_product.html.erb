@@ -1,0 +1,19 @@
+<!-- views/products/_product.html.erb -->
+<div class="card has-background-white">
+  <div class="card-image">
+    <figure class="image is-4by5">
+      <% if product.image.attached? %>
+        <%= image_tag product.image, alt: product.name, class: "product-image" %>
+      <% else %>
+        <p>(No image available)</p>
+      <% end %>
+    </figure>
+  </div>
+  <div class="card-content">
+    <p class="is-size-7 has-text-right is-uppercase"><%= product.metal %></p>
+    <p class="title is-6 has-text-grey-darker has-text-weight-semibold"><%= product.status_flag %></p>
+    <p class="is-size-6"><%= link_to product.name, product_path(product) %></p>
+    <p class="is-size-6"><%= product.category.name %></p>
+    <p class="is-size-6 has-text-primary">$<%= '%.2f' % product.price %></p>
+  </div>
+</div>

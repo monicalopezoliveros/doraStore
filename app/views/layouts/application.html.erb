@@ -8,9 +8,73 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "bulma.min", media: 'all', "data-turbo-track": "reload" %>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   </head>
 
   <body>
+    <nav class="level mb-0 has-background-white-ter">
+      <div class="level-left">
+        <p class="level-item">
+          <h1 class="title is-3 has-text-success">Dora Jewelry</h1>
+        </p>
+      </div>
+
+      <div class="level-right">
+        <div class="level-item">
+          <a href="">
+            <span class="icon">
+               <i class="fa-solid fa-location-dot has-text-success"></i>
+            </span>
+          </a>
+        </div>
+        <div class="level-item">
+          <a href="">
+            <span class="icon">
+              <i class="fa-solid fa-user has-text-success"></i>
+            </span>
+          </a>
+        </div>
+        <div class="level-item">
+          <a href="">
+            <span class="icon">
+              <i class="fa-sharp fa-solid fa-bag-shopping has-text-success"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="level has-background-white-bis">
+        <div class="level-left">
+          <div class="level-item"> <a class="has-text-grey-darker has-text-weight-semibold is-uppercase" href="">Rings </a></div>
+          <div class="level-item"> <a class="has-text-grey-darker has-text-weight-semibold is-uppercase" href="">Charms </a></div>
+          <div class="level-item"> <a class="has-text-grey-darker has-text-weight-semibold is-uppercase" href="">Earrings </a></div>
+          <div class="level-item"> <a class="has-text-grey-darker has-text-weight-semibold is-uppercase" href="">Bracelets </a></div>
+          <div class="level-item"> <a class="has-text-grey-darker has-text-weight-semibold is-uppercase" href="">Necklaces </a></div>
+        </div>
+      <div class="level-right">
+
+        <div class="field has-addons">
+          <div class="control">
+            <input
+              class="input is-success has-background-white has-text-grey "
+              type="text"
+              placeholder="Find product">
+          </div>
+          <div class="control">
+            <button class="button is-info has-background-success-light">
+              Search
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
     <%= yield %>
   </body>
 </html>

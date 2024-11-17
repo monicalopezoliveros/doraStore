@@ -1,14 +1,29 @@
-<h1><%= @product.name %></h1>
 
-<div class="product-details">
-  <% if @product.image.attached? %>
-    <%= image_tag @product.image, alt: @product.name, class: "product-detail-image" %>
-  <% end %>
-  <p><strong>Description:</strong> <%= @product.description %></p>
-  <p><strong>Metal:</strong> <%= @product.metal %></p>
-  <p><strong>Price:</strong> $<%= @product.price %></p>
-  <p><strong>Category:</strong> <%= @product.category.name %></p>
-  <p><strong>state:</strong> <%= @product.status_flag %></p>
+
+<div class="container">
+  <div class="columns is-vcentered">
+    <div class="column is-one-third">
+      <!-- Imagen del producto -->
+      <% if @product.image.attached? %>
+        <figure class="image is-4by5">
+          <%= image_tag @product.image, alt: @product.name, class: "product-detail-image" %>
+        </figure>
+      <% end %>
+    </div>
+
+    <div class="column">
+      <!-- Descripción del producto -->
+      <div class="content">
+        <h1 class="title is-4 has-text-grey"><%= @product.name %></h1>
+        <p><strong class="has-text-grey">Description:</strong> <%= @product.description %></p>
+        <p><strong class="has-text-grey">Metal:</strong> <%= @product.metal %></p>
+        <p><strong class="has-text-grey">Price:</strong> $<%= '%.2f' % @product.price %></p>
+        <p><strong class="has-text-grey">Category:</strong> <%= @product.category.name %></p>
+        <p><strong class="has-text-grey">State:</strong> <%= @product.status_flag %></p>
+      </div>
+      <button class="button is-black is-fullwidth">Add to Back</button>
+      <!-- Botón para regresar a la lista de productos -->
+      <%= link_to "Back to the list", products_path, class: "button is-light" %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "Back to the list", products_path, class: "btn btn-secondary" %>

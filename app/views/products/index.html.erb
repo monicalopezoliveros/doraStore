@@ -1,19 +1,14 @@
-<h1>Products</h1>
+<h1 class="subtitle is-3">Products</h1>
 
-<div class="products-list">
+<div class="columns is-multiline is-variable is-4">
   <% @products.each do |product| %>
-    <div class="product-card">
-      <h2><%= link_to product.name, product_path(product) %></h2>
-      <p>Category: <%= product.category.name %></p>
-      <p>Price: $<%= product.price %></p>
-      <% if product.image.attached? %>
-        <%= image_tag product.image, alt: product.name, class: "product-image" %>
-      <% else %>
-        <p>(Sin imagen)</p>
-      <% end %>
+    <div class="column is-one-third-tablet is-one-quarter-desktop is-full-mobile">
+      <%= render partial: "product", locals: { product: product } %>
     </div>
   <% end %>
 </div>
-<div class="pagination">
-  <%= paginate @products %>
+
+<div class="has-text-centered">
+  <%= paginate @products, theme: 'bulma', class: 'pagination is-centered has-background-primary' %>
 </div>
+
