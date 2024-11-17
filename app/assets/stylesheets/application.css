@@ -14,7 +14,19 @@
  *= require_self
  */
 
+
  .level a {
    text-decoration: none;
  }
+
+ .custom-background {
+    background-image: url('banner');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .pagination-custom {
+    /* Aquí no agregamos estilos, solo la clase vacía */
+  }
 

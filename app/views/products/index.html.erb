@@ -1,5 +1,10 @@
 <h1 class="subtitle is-3">Products</h1>
 
+
+<div>
+  <%= paginate @products, class: 'pagination-custom' %>
+</div>
+
 <div class="columns is-multiline is-variable is-4">
   <% @products.each do |product| %>
     <div class="column is-one-third-tablet is-one-quarter-desktop is-full-mobile">
@@ -8,7 +13,5 @@
   <% end %>
 </div>
 
-<div class="has-text-centered">
-  <%= paginate @products, theme: 'bulma', class: 'pagination is-centered has-background-primary' %>
-</div>
+
 
