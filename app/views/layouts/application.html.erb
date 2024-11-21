@@ -49,29 +49,25 @@
 
     <div class="level has-background-white-ter">
         <div class="level-left">
-          <div class="level-item"> <a class="has-text-grey-darker has-text-weight-semibold is-uppercase" href="">Rings </a></div>
-          <div class="level-item"> <a class="has-text-grey-darker has-text-weight-semibold is-uppercase" href="">Charms </a></div>
-          <div class="level-item"> <a class="has-text-grey-darker has-text-weight-semibold is-uppercase" href="">Earrings </a></div>
-          <div class="level-item"> <a class="has-text-grey-darker has-text-weight-semibold is-uppercase" href="">Bracelets </a></div>
-          <div class="level-item"> <a class="has-text-grey-darker has-text-weight-semibold is-uppercase" href="">Necklaces </a></div>
-        </div>
-      <div class="level-right">
-
-        <div class="field has-addons">
-          <div class="control">
-            <input
-              class="input is-success has-background-white has-text-grey "
-              type="text"
-              placeholder="Find product">
+        <% ["Rings", "Charms", "Earrings", "Bracelets", "Necklaces"].each do |category| %>
+          <div class="level-item">
+            <%= link_to category, products_path(category: category),
+                        class: "has-text-grey-darker has-text-weight-semibold is-uppercase #{'has-text-success' if params[:category] == category}" %>
           </div>
-          <div class="control">
-            <button class="button is-info has-background-success-light">
-              Search
-            </button>
-          </div>
+        <% end %>
         </div>
-
-      </div>
+        <div class="level-right">
+          <%= form_with url: products_path, method: :get, local: true, class: "field has-addons" do %>
+            <div class="control">
+              <%= text_field_tag :query, params[:query],
+                                class: "input is-success has-background-white has-text-grey",
+                                placeholder: "Find product" %>
+            </div>
+            <div class="control">
+              <%= submit_tag "Search", class: "button is-success" %>
+            </div>
+          <% end %>
+        </div>
     </div>
 
     <section class="hero is-medium custom-background">

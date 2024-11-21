@@ -1,17 +1,23 @@
-<h1 class="subtitle is-3">Products</h1>
-
-
-<div>
-  <%= paginate @products, class: 'pagination-custom' %>
-</div>
-
-<div class="columns is-multiline is-variable is-4">
-  <% @products.each do |product| %>
-    <div class="column is-one-third-tablet is-one-quarter-desktop is-full-mobile">
-      <%= render partial: "product", locals: { product: product } %>
-    </div>
+<h1 class="subtitle is-3">
+  <% if @query.present? %>
+    Search Results for "<%= @query %>"
+  <% else %>
+    Products
   <% end %>
-</div>
+</h1>
 
+<% if @products.any? %>
+  <div>
+    <%= paginate @products, class: 'pagination-custom' %>
+  </div>
 
-
+  <div class="columns is-multiline is-variable is-4">
+    <% @products.each do |product| %>
+      <div class="column is-one-third-tablet is-one-quarter-desktop is-full-mobile">
+        <%= render partial: "product", locals: { product: product } %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No products found for "<%= @query %>".</p>
+<% end %>

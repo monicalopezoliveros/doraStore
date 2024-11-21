@@ -7,5 +7,5 @@ class Product < ApplicationRecord
 
   enum status_flag: { On_sale: 0, New: 1, Recently_updated: 2 }
 
-  validates :metal, presence: true, inclusion: { in: ["gold", "silver", "bronze", "platinum", "other"] }
+  validates :metal, presence: true, inclusion: { in: ["GOLD", "SILVER", "PLATINUM"] }
 end

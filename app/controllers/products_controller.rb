@@ -3,16 +3,29 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.includes(:category).order(created_at: :desc).page(params[:page]).per(8)
-    # @products = Product.all
-    #busca deacuerdo a una condicion que esta en onsale
-    # @products = Product.includes(:category).where(status_flag: :On_sale).order(created_at: :desc)
+    @products = Product.includes(:category).order(created_at: :desc)
+
+    # Filter by keyword
+    if params[:query].present?
+      @query = params[:query]
+      @products = @products.where("name LIKE ? OR metal LIKE ?", "%#{@query}%", "%#{@query}%")
+    end
+
+    # Filter by category
+    if params[:category].present?
+      @category = params[:category]
+      @products = @products.joins(:category).where(categories: { name: @category })
+    end
+
+    # Pagination
+    @products = @products.page(params[:page]).per(8)
   end
+
 
   # GET /products/:id
   def show
     product = Product.find(params[:id])
-    render json: { price: product.price }
+    #render json: { price: product.price }
 
   end
 

@@ -3,9 +3,9 @@
 <div class="container">
   <div class="columns is-vcentered">
     <div class="column is-one-third">
-      <!-- Imagen del producto -->
+      <!-- Product image -->
       <% if @product.image.attached? %>
-        <figure class="image is-4by5">
+        <figure class="image is-square">
           <%= image_tag @product.image, alt: @product.name, class: "product-detail-image" %>
         </figure>
       <% end %>
@@ -17,12 +17,12 @@
         <h1 class="title is-4 has-text-grey"><%= @product.name %></h1>
         <p><strong class="has-text-grey">Description:</strong> <%= @product.description %></p>
         <p><strong class="has-text-grey">Metal:</strong> <%= @product.metal %></p>
-        <p><strong class="has-text-grey">Price:</strong> $<%= '%.2f' % @product.price %></p>
+        <p class="has-text-success"><strong class="has-text-grey">Price:</strong> $<%= '%.2f' % @product.price %></p>
         <p><strong class="has-text-grey">Category:</strong> <%= @product.category.name %></p>
-        <p><strong class="has-text-grey">State:</strong> <%= @product.status_flag %></p>
+        <p class="has-text-warning"> <%= @product.status_flag %></p>
       </div>
-      <button class="button is-black is-fullwidth">Add to Back</button>
-      <!-- Botón para regresar a la lista de productos -->
+      <button class="button is-black is-fullwidth">ADD TO BAG</button>
+      <!-- Button to return to the product list -->
       <%= link_to "Back to the list", products_path, class: "button is-light" %>
     </div>
   </div>
