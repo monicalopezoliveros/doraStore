@@ -29,9 +29,7 @@ ActiveAdmin.register Order do
       f.has_many :order_details, allow_destroy: true, new_record: true do |od|
         od.input :product, collection: Product.all.map { |p| [p.name, p.id] }, include_blank: false, input_html: { id: "product_#{od.index}" }
         od.input :quantity
-        od.input :unit_price, input_html: { id: "price_#{od.object.id}"}
-
-
+        # od.input :unit_price, input_html: { id: "price_#{od.index}", readonly: true }  # Aquí puedes activar el precio si lo necesitas
       end
     end
     f.actions
@@ -44,13 +42,16 @@ ActiveAdmin.register Order do
     column :customer
     column :order_date
     column :status do |order|
-       order.status ? order.status.capitalize : "Unknown"
+      order.status ? order.status.capitalize : "Unknown"
     end
     column :notes
     column "Order Details" do |order|
       order.order_details.map do |detail|
         "Product: #{detail.product.name}, Quantity: #{detail.quantity}, Unit Price: #{detail.unit_price}"
       end.join("<br>").html_safe
+    end
+    column "Total Amount" do |order|
+      number_to_currency(order.total_amount) # Display total as currency
     end
     actions
   end
@@ -78,6 +79,14 @@ ActiveAdmin.register Order do
         column "Total" do |detail|
           "$#{'%.2f' % (detail.quantity * detail.unit_price)}"
         end
+      end
+    end
+
+    # Displays the total of the order
+    panel "Order Total" do
+      div do
+        strong "Total Amount: "
+        span number_to_currency(order.total_amount) # Mostrar el total como moneda
       end
     end
   end

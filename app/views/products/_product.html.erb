@@ -1,7 +1,7 @@
 <!-- views/products/_product.html.erb -->
 <div class="card has-background-white">
   <div class="card-image">
-    <figure class="image is-4by5">
+    <figure class="image is-square">
       <% if product.image.attached? %>
         <%= image_tag product.image, alt: product.name, class: "product-image" %>
       <% else %>

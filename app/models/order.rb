@@ -20,4 +20,9 @@ class Order < ApplicationRecord
   def customer_address
     customer.address
   end
+
+  # Method for calculating the order total
+  def total_amount
+    order_details.sum { |detail| detail.quantity * detail.unit_price }
+  end
 end
