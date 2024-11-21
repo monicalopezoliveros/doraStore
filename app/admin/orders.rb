@@ -53,6 +53,13 @@ ActiveAdmin.register Order do
     column "Total Amount" do |order|
       number_to_currency(order.total_amount) # Display total as currency
     end
+    column "Total with Tax" do |order|
+      number_to_currency(order.total_with_tax) # Display total with tax as currency
+    end
+    column "Province and Tax" do |order|
+      province = order.customer.province
+      "Province: #{province.name}, Tax: #{'%.2f' % province.tax}" # Display province name and tax rate
+    end
     actions
   end
 
@@ -87,6 +94,22 @@ ActiveAdmin.register Order do
       div do
         strong "Total Amount: "
         span number_to_currency(order.total_amount) # Mostrar el total como moneda
+      end
+      div do
+        strong "Total with Tax: "
+        span number_to_currency(order.total_with_tax) # Mostrar el total con impuestos
+      end
+    end
+    # Note with Province and Tax information
+    panel "Province and Tax Info" do
+      province = order.customer.province
+      div do
+        strong "Province: "
+        span province.name
+      end
+      div do
+        strong "Tax Rate: "
+        span "#{'%.2f' % province.tax}%"
       end
     end
   end

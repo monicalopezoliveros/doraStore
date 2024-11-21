@@ -25,4 +25,11 @@ class Order < ApplicationRecord
   def total_amount
     order_details.sum { |detail| detail.quantity * detail.unit_price }
   end
+
+  # Method for calculating the total with taxes according to the client's province
+  def total_with_tax
+    subtotal = total_amount
+    tax_rate = customer.province.tax # The tax rate of the client's province is accessed
+    subtotal + (subtotal * tax_rate)
+  end
 end
