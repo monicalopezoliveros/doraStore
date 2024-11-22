@@ -5,7 +5,7 @@ ActiveAdmin.register Order do
   # Override the update action
   controller do
     def update
-      # Actualizar la orden y sus detalles
+      # Update the order and its details
       if resource.update(permitted_params[:order])
         redirect_to resource_path, notice: "Order updated successfully!"
       else
@@ -29,7 +29,6 @@ ActiveAdmin.register Order do
       f.has_many :order_details, allow_destroy: true, new_record: true do |od|
         od.input :product, collection: Product.all.map { |p| [p.name, p.id] }, include_blank: false, input_html: { id: "product_#{od.index}" }
         od.input :quantity
-        # od.input :unit_price, input_html: { id: "price_#{od.index}", readonly: true }  # Aquí puedes activar el precio si lo necesitas
       end
     end
     f.actions
@@ -51,14 +50,14 @@ ActiveAdmin.register Order do
       end.join("<br>").html_safe
     end
     column "Total Amount" do |order|
-      number_to_currency(order.total_amount) # Display total as currency
+      number_to_currency(order.total_amount)
     end
     column "Total with Tax" do |order|
-      number_to_currency(order.total_with_tax) # Display total with tax as currency
+      number_to_currency(order.total_with_tax)
     end
     column "Province and Tax" do |order|
       province = order.customer.province
-      "Province: #{province.name}, Tax: #{'%.2f' % province.tax}" # Display province name and tax rate
+      "Province: #{province.name}, Tax: #{'%.2f' % province.tax}"
     end
     actions
   end
@@ -93,11 +92,11 @@ ActiveAdmin.register Order do
     panel "Order Total" do
       div do
         strong "Total Amount: "
-        span number_to_currency(order.total_amount) # Mostrar el total como moneda
+        span number_to_currency(order.total_amount)
       end
       div do
         strong "Total with Tax: "
-        span number_to_currency(order.total_with_tax) # Mostrar el total con impuestos
+        span number_to_currency(order.total_with_tax)
       end
     end
     # Note with Province and Tax information

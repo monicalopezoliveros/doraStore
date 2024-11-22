@@ -25,7 +25,6 @@ class ProductsController < ApplicationController
   # GET /products/:id
   def show
     product = Product.find(params[:id])
-    #render json: { price: product.price }
 
   end
 

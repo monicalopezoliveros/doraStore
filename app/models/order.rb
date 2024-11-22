@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  # Associations
   belongs_to :customer
   has_many :order_details, dependent: :destroy
   has_many :products, through: :order_details
@@ -15,6 +16,7 @@ class Order < ApplicationRecord
     failed: 7
   }
 
+  # Validations
   validates :status, presence: true, inclusion: { in: statuses.keys }
 
   def customer_address

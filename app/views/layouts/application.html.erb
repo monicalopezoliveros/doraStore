@@ -15,82 +15,97 @@
   </head>
 
   <body>
-    <nav class="level mb-0 has-background-white-ter">
-      <div class="level-left">
-        <p class="level-item">
-          <h1 class="title is-3 has-text-success">Dora Jewelry</h1>
-        </p>
-      </div>
-
-      <div class="level-right">
-        <div class="level-item">
-          <a href="">
-            <span class="icon">
-               <i class="fa-solid fa-location-dot has-text-success"></i>
-            </span>
-          </a>
-        </div>
-        <div class="level-item">
-          <a href="">
-            <span class="icon">
-              <i class="fa-solid fa-user has-text-success"></i>
-            </span>
-          </a>
-        </div>
-        <div class="level-item">
-          <a href="">
-            <span class="icon">
-              <i class="fa-sharp fa-solid fa-bag-shopping has-text-success"></i>
-            </span>
-          </a>
-        </div>
-      </div>
-    </nav>
-
-    <div class="level has-background-white-ter">
+    <div class="container">
+      <%# Level 1 %>
+      <nav class="level mb-0 has-background-white-ter">
         <div class="level-left">
-        <% ["Rings", "Charms", "Earrings", "Bracelets", "Necklaces"].each do |category| %>
-          <div class="level-item">
-            <%= link_to category, products_path(category: category),
-                        class: "has-text-grey-darker has-text-weight-semibold is-uppercase #{'has-text-success' if params[:category] == category}" %>
-          </div>
-        <% end %>
+
         </div>
+
         <div class="level-right">
-          <%= form_with url: products_path, method: :get, local: true, class: "field has-addons" do %>
-            <div class="control">
-              <%= text_field_tag :query, params[:query],
-                                class: "input is-success has-background-white has-text-grey",
-                                placeholder: "Find product" %>
-            </div>
-            <div class="control">
-              <%= submit_tag "Search", class: "button is-success" %>
+          <div class="level-item">
+            <a href="">
+              <span class="icon">
+                <i class="fa-solid fa-location-dot has-text-success"></i>
+              </span>
+            </a>
+          </div>
+          <div class="level-item">
+            <a href="">
+              <span class="icon">
+                <i class="fa-solid fa-user has-text-success"></i>
+              </span>
+            </a>
+          </div>
+          <div class="level-item">
+            <a href="">
+              <span class="icon">
+                <i class="fa-sharp fa-solid fa-bag-shopping has-text-success"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <%# Level 2 %>
+      <div class="level has-background-white-ter">
+        <div class="level-left">
+          <p class="level-item">
+            <%= link_to root_path do %>
+              <figure class="image is-128x128">
+                <img src="/assets/logoDora.png" alt="Dora Jewelry Logo" />
+              </figure>
+             <% end %>
+          </p>
+
+          <% ["Rings", "Charms", "Earrings", "Bracelets", "Necklaces"].each do |category| %>
+            <div class="level-item">
+              <%= link_to category, products_path(category: category),
+                          class: "has-text-grey-darker has-text-weight-semibold is-uppercase #{'has-text-success' if params[:category] == category}" %>
             </div>
           <% end %>
-        </div>
-    </div>
+          </div>
+          <div class="level-right">
+            <a class="has-text-success"	href="">ABOUT US</a>
+            <%= form_with url: products_path, method: :get, local: true, class: "field has-addons" do %>
+            <div class="field has-addons">
 
-    <section class="hero is-medium custom-background">
-      <div class="hero-body">
-        <div class="container has-text-left">
-        <p class="title">BLACK FRIDAY</p>
-        <p class="subtitle has-text-black is-regular">Save 30% Sitewide</p>
-        </div>
+                <div class="control">
+                  <%= text_field_tag :query, params[:query],
+                                    class: "input is-small",
+                                    placeholder: "Find product" %>
+                </div>
+                <div class="control">
+                  <%= submit_tag "Search", class: "button is-info" %>
+                </div>
+
+            </div>
+            <% end %>
+          </div>
       </div>
-    </section>
 
-    <%= yield %>
+      <section class="hero is-medium custom-background">
+        <div class="hero-body">
+          <div class="container has-text-left">
+          <p class="title">BLACK FRIDAY</p>
+          <p class="subtitle has-text-black is-regular">Save 30% Sitewide</p>
+          </div>
+        </div>
+      </section>
 
-    <footer class="footer">
-    <div class="content has-text-centered">
-      <p>
-        <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>.
-        The source code is licensed
-        <a href="https://opensource.org/license/mit">MIT</a>. The
-        website content is licensed
-        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//">CC BY NC SA 4.0</a>
-      </p>
+      <%= yield %>
+
+      <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>.
+          The source code is licensed
+          <a href="https://opensource.org/license/mit">MIT</a>. The
+          website content is licensed
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//">CC BY NC SA 4.0</a>
+        </p>
+      </div>
+    </footer>
     </div>
-  </footer>
   </body>
 </html>

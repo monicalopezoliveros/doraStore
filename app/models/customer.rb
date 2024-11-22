@@ -14,6 +14,5 @@ class Customer < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
-  # validates :postal_code, format: { with: /\A[0-9A-Za-z]{3,10}\z/, message: "is invalid" }
-  # validates :gender, inclusion: { in: %w[male female other], message: "is not valid" }, allow_blank: true
+
 end
