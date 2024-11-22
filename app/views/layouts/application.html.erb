@@ -66,7 +66,8 @@
           <% end %>
           </div>
           <div class="level-right">
-            <a class="has-text-success"	href="">ABOUT US</a>
+            <%= link_to 'ABOUT US', about_path, class: 'has-text-success' %>
+
             <%= form_with url: products_path, method: :get, local: true, class: "field has-addons" do %>
             <div class="field has-addons">
 
@@ -84,6 +85,7 @@
           </div>
       </div>
 
+      <%# Banner %>
       <section class="hero is-medium custom-background">
         <div class="hero-body">
           <div class="container has-text-left">

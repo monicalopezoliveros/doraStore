@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   root "products#index"
+
+  get '/pages/:title', to: 'pages#show', as: 'page'
+
+  get 'about', to: 'pages#about', as: :about
+
 end
