@@ -1,0 +1,99 @@
+<h1 class="subtitle is-3">Shopping cart</h1>
+
+<div class="columns">
+  <div class="column is-narrow">
+    <%# First column %>
+    <div class="box" style="width: 700px" is-two-thirds>
+      <p class="title is-5">Items in my Cart</p>
+      <p class="subtitle">This column is only 200px wide.</p>
+      <% if @cart.empty? %>
+        <p>Your cart is empty.</p>
+      <% else %>
+        <table class="table is-bordered">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @cart.each do |item| %>
+              <tr>
+                <td><%= item["name"] %></td>
+                <td><%= number_to_currency(item["price"]) %></td>
+                <td class="field has-addons">
+                  <%# Form to decrease the amount %>
+                  <div class="control">
+                    <%= form_with url: update_cart_path, method: :patch, local: false do |f| %>
+                      <%= f.hidden_field :product_id, value: item["product_id"] %>
+                      <%= f.hidden_field :quantity, value: item["quantity"].to_i - 1 %>
+                      <button type="submit" class="button is-info" <%= "disabled" if item["quantity"] <= 1 %>>
+                        -
+                      </button>
+                    <% end %>
+                  </div>
+
+                  <%# Input to display the current amount (read only)%>
+                  <input class="input is-static has-text-centered" type="text" value="<%= item["quantity"] %>" readonly>
+
+                  <%# Form to increase the amount %>
+                  <div class="control">
+                    <%= form_with url: update_cart_path, method: :patch, local: false do |f| %>
+                      <%= f.hidden_field :product_id, value: item["product_id"] %>
+                      <%= f.hidden_field :quantity, value: item["quantity"].to_i + 1 %>
+                      <button type="submit" class="button is-info">
+                        +
+                      </button>
+                    <% end %>
+                  </div>
+                </td>
+
+                <td><%= number_to_currency(item["price"].to_f * item["quantity"].to_i) %></td>
+                <td>
+                  <%= button_to "X", remove_cart_path(product_id: item["product_id"]), method: :delete, class: "button" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+  <div class="column">
+    <%# Second column %>
+    <div class="box">
+      <p class="title is-5">Order Summary</p><br>
+      <p class="subtitle is-4"><%= @cart.sum { |item| item["quantity"].to_i } %><strong> Items</strong> </p>
+      <hr>
+      <p><strong>Subtotal :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
+      <p><strong>Shipping :</strong> $0.00</p>
+      <p><strong>Estimated Tax :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
+      <hr>
+      <p class="subtitle is-3"><strong>Total :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
+
+    </div>
+
+    <%# Buttons %>
+    <%# <div class="buttons are-medium">
+      <button class="button is-fullwidth">CHECKOUT</button>
+    </div> %>
+
+    <div class="buttons are-medium">
+      <%= link_to checkout_path do %>
+        <button class="button ">CHECKOUT</button>
+      <% end %>
+    </div>
+
+    <div class="buttons are-medium">
+      <%= link_to root_path do %>
+        <button class="button is-success">Continue Shopping</button>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+

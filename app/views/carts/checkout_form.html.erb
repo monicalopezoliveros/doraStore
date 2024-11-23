@@ -1,0 +1,105 @@
+<h1 class="subtitle is-3">Checkout</h1>
+
+<div class="columns">
+  <div class="column is-narrow">
+    <%# First column %>
+    <div class="box" style="width: 700px" is-two-thirds>
+        <p class="title is-5">Shipping Details</p>
+        <p>If you are already a registered customer, please log in to enjoy a faster and easier payment experience.</p>
+        <div class="buttons are-medium">
+            <button class="button is-fullwidth">SING IN</button>
+        </div>
+
+        <%= form_with(model: @customer, url: customers_path, method: :post, local: true) do |form| %>
+            <div class="field">
+                <label class="label">First Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="e.g Alex">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Last Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="e.gSmith">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Phone</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="e.g 587 222 7711">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Address</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="e.g 111 Osborne St Unit 511">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Postal Code</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="R3L 2G7">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">City</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="e.g Calgary">
+                </div>
+            </div>
+            <div class="control">
+                <label class="label">Province</label>
+                <div class="select">
+                    <select>
+                    <option>Alberta</option>
+                    <option>British Columbia (BC)</option>
+                    <option>Manitoba</option>
+                    <option>Ontario</option>
+                    <option>Quebec</option>
+                    <option>Saskatchewan</option>
+                    <option>Newfoundland and Labrador	</option>
+                    <option>Nova Scotia	</option>
+                    <option>New Brunswick	</option>
+                    <option>Prince Edward Island</option>
+                    </select>
+                </div>
+            </div>
+        <% end %>
+
+    </div>
+  </div>
+  <div class="column">
+    <%# Second column %>
+    <div class="box">
+      <p class="title is-5">Order Summary</p><br>
+      <p class="subtitle is-4"><%= @cart.sum { |item| item["quantity"].to_i } %><strong> Items</strong> </p>
+      <hr>
+      <p><strong>Subtotal :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
+      <p><strong>Shipping :</strong> $0.00</p>
+      <p><strong>Estimated Tax :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
+      <hr>
+      <p class="subtitle is-3"><strong>Total :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
+
+    </div>
+
+    <%# Buttons %>
+    <div class="buttons are-medium">
+      <button class="button is-fullwidth">CHECKOUT</button>
+    </div>
+
+  </div>
+</div>
+
+
