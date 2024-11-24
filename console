@@ -1,0 +1,18 @@
+ => 
+[[31m[1m"[0m[31mid[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mfirst_name[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mlast_name[0m[31m[1m"[0m,
+ [31m[1m"[0m[31memail[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mphone[0m[31m[1m"[0m,
+ [31m[1m"[0m[31maddress[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mpostal_code[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mcity[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mprovince_id[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mgender[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mpassword[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mcreated_at[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mupdated_at[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mencrypted_password[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mreset_password_token[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mreset_password_sent_at[0m[31m[1m"[0m,
+ [31m[1m"[0m[31mremember_created_at[0m[31m[1m"[0m] 

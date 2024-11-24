@@ -29,4 +29,9 @@ Rails.application.routes.draw do
   resources :customers, only: [:new, :create]
   get 'checkout', to: 'checkout#index'
 
+  devise_for :customers, controllers: {
+    registrations: 'customers/registrations'
+  }
+
+
 end

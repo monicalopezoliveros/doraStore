@@ -3,83 +3,141 @@
 <div class="columns">
   <div class="column is-narrow">
     <%# First column %>
-    <div class="box" style="width: 700px" is-two-thirds>
+    <% if customer_signed_in? %>
+      <div class="box" style="width: 700px" is-two-thirds>
         <p class="title is-5">Shipping Details</p>
         <p>If you are already a registered customer, please log in to enjoy a faster and easier payment experience.</p>
-        <div class="buttons are-medium">
-            <button class="button is-fullwidth">SING IN</button>
-        </div>
-
-        <%= form_with(model: @customer, url: customers_path, method: :post, local: true) do |form| %>
-            <div class="field">
-                <label class="label">First Name</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="e.g Alex">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Last Name</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="e.gSmith">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Email</label>
-                <div class="control">
-                    <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Phone</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="e.g 587 222 7711">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Address</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="e.g 111 Osborne St Unit 511">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Postal Code</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="R3L 2G7">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">City</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="e.g Calgary">
-                </div>
-            </div>
+        <%= form_with(model: @shipping_detail, url: checkout_path, method: :post, local: true) do |form| %>
+          <div class="field">
+            <label class="label">Address</label>
             <div class="control">
-                <label class="label">Province</label>
-                <div class="select">
-                    <select>
-                    <option>Alberta</option>
-                    <option>British Columbia (BC)</option>
-                    <option>Manitoba</option>
-                    <option>Ontario</option>
-                    <option>Quebec</option>
-                    <option>Saskatchewan</option>
-                    <option>Newfoundland and Labrador	</option>
-                    <option>Nova Scotia	</option>
-                    <option>New Brunswick	</option>
-                    <option>Prince Edward Island</option>
-                    </select>
-                </div>
+              <input class="input" type="text" placeholder="e.g 111 Osborne St Unit 511" name="address" value="<%= current_customer.address %>">
             </div>
-        <% end %>
+          </div>
 
-    </div>
+          <div class="field">
+            <label class="label">Postal Code</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="R3L 2G7" name="postal_code" value="<%= current_customer.postal_code %>">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">City</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="e.g Calgary" name="city" value="<%= current_customer.city %>">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Province</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="e.g Calgary" name="city" value="<%= current_customer.province.name %>">
+            </div>
+          </div>
+
+          <div class="control">
+            <button class="button is-fullwidth" type="submit">Proceed with Payment</button>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <!-- Formulario para crear cliente si no está autenticado -->
+      <div class="box" style="width: 700px" is-two-thirds>
+        <%= form_with(model: @customer, url: customers_path, method: :post, local: true) do |form| %>
+          <p class="title is-5">Create an Account</p>
+
+          <div class="field">
+            <label class="label">First Name</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="e.g Alex" name="first_name" value="<%= @customer.first_name %>">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Last Name</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="e.g Smith" name="last_name" value="<%= @customer.last_name %>">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com" name="email" value="<%= @customer.email %>">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Phone</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="e.g 587 222 7711" name="phone" value="<%= @customer.phone %>">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Address</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="e.g 111 Osborne St Unit 511" name="address" value="<%= @customer.address %>">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Postal Code</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="R3L 2G7" name="postal_code" value="<%= @customer.postal_code %>">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">City</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="e.g Calgary" name="city" value="<%= @customer.city %>">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Province</label>
+            <div class="control">
+              <div class="select">
+                <select name="province_id">
+                  <option value="1">Alberta</option>
+                  <option value="2">British Columbia (BC)</option>
+                  <option value="3">Manitoba</option>
+                  <option value="4">Ontario</option>
+                  <option value="5">Quebec</option>
+                  <option value="6">Saskatchewan</option>
+                  <option value="7">Newfoundland and Labrador</option>
+                  <option value="8">Nova Scotia</option>
+                  <option value="9">New Brunswick</option>
+                  <option value="10">Prince Edward Island</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="password" name="password" placeholder="Create a password">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Confirm Password</label>
+            <div class="control">
+              <input class="input" type="password" name="password_confirmation" placeholder="Confirm your password">
+            </div>
+          </div>
+
+          <div class="control">
+            <button class="button is-fullwidth" type="submit">Create Account and Proceed with Payment</button>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
+
   <div class="column">
     <%# Second column %>
     <div class="box">
@@ -88,10 +146,11 @@
       <hr>
       <p><strong>Subtotal :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
       <p><strong>Shipping :</strong> $0.00</p>
-      <p><strong>Estimated Tax :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
+      <p><strong>Estimated Tax :</strong>
+
+      <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
       <hr>
       <p class="subtitle is-3"><strong>Total :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
-
     </div>
 
     <%# Buttons %>
@@ -101,5 +160,3 @@
 
   </div>
 </div>
-
-

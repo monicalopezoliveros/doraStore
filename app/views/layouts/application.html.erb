@@ -17,6 +17,8 @@
   <body>
     <div class="container">
       <%# Level 1 %>
+
+      <%# Level 1 %>
       <nav class="level mb-0 has-background-white-ter">
         <div class="level-left">
 
@@ -24,25 +26,36 @@
 
         <div class="level-right">
           <div class="level-item">
+              <a href="">
+                <span class="icon">
+                  <i class="fa-solid fa-user has-text-success"></i>
+                </span>
+              </a>
+          </div>
+
+          <div class="level-item">
+            <% if customer_signed_in? %>
+              <p class="subtitle is-5">Welcome <%= current_customer.first_name %>!</p>
+            <% else %>
+              <p>logg in</p>
+            <% end %>
+          </div>
+          <div class="level-item">
             <a href="">
               <span class="icon">
                 <i class="fa-solid fa-location-dot has-text-success"></i>
               </span>
             </a>
           </div>
+
           <div class="level-item">
-            <a href="">
-              <span class="icon">
-                <i class="fa-solid fa-user has-text-success"></i>
-              </span>
-            </a>
-          </div>
-          <div class="level-item">
-            <a href="">
-              <span class="icon">
-                <i class="fa-sharp fa-solid fa-bag-shopping has-text-success"></i>
-              </span>
-            </a>
+
+              <%= link_to cart_path do %>
+                <span class="icon">
+                  <i class="fa-sharp fa-solid fa-bag-shopping has-text-success"></i>
+                </span>
+              <% end %>
+
           </div>
         </div>
       </nav>
@@ -55,7 +68,7 @@
               <figure class="image is-128x128">
                 <img src="/assets/logoDora.png" alt="Dora Jewelry Logo" />
               </figure>
-             <% end %>
+            <% end %>
           </p>
 
           <% ["Rings", "Charms", "Earrings", "Bracelets", "Necklaces"].each do |category| %>
@@ -69,7 +82,7 @@
             <%= link_to 'ABOUT US', about_path, class: 'has-text-success' %>
 
             <%= form_with url: products_path, method: :get, local: true, class: "field has-addons" do %>
-            <div class="field has-addons">
+              <div class="field has-addons">
 
                 <div class="control">
                   <%= text_field_tag :query, params[:query],
@@ -80,7 +93,7 @@
                   <%= submit_tag "Search", class: "button is-info" %>
                 </div>
 
-            </div>
+              </div>
             <% end %>
           </div>
       </div>
