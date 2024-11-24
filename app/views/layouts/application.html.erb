@@ -9,6 +9,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= stylesheet_link_tag "bulma.min", media: 'all', "data-turbo-track": "reload" %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -17,9 +18,7 @@
   <body>
     <div class="container">
       <%# Level 1 %>
-
-      <%# Level 1 %>
-      <nav class="level mb-0 has-background-white-ter">
+      <nav class="level mb-0 pb-0 has-background-white-ter">
         <div class="level-left">
 
         </div>
@@ -36,8 +35,9 @@
           <div class="level-item">
             <% if customer_signed_in? %>
               <p class="subtitle is-5">Welcome <%= current_customer.first_name %>!</p>
+              <%= link_to 'Sign out', destroy_customer_session_path, method: :delete, data: { turbo: false }, class: 'button is-danger' %>
             <% else %>
-              <p>logg in</p>
+              <%= link_to 'Login', new_customer_session_path, class: 'button is-primary' %>
             <% end %>
           </div>
           <div class="level-item">
@@ -63,27 +63,34 @@
       <%# Level 2 %>
       <div class="level has-background-white-ter">
         <div class="level-left">
-          <p class="level-item">
+
+          <div class="level-item">
             <%= link_to root_path do %>
               <figure class="image is-128x128">
                 <img src="/assets/logoDora.png" alt="Dora Jewelry Logo" />
               </figure>
             <% end %>
-          </p>
-
-          <% ["Rings", "Charms", "Earrings", "Bracelets", "Necklaces"].each do |category| %>
-            <div class="level-item">
-              <%= link_to category, products_path(category: category),
-                          class: "has-text-grey-darker has-text-weight-semibold is-uppercase #{'has-text-success' if params[:category] == category}" %>
-            </div>
-          <% end %>
           </div>
-          <div class="level-right">
+
+          <%# <div class="level-item"> %>
+            <% ["Rings", "Charms", "Earrings", "Bracelets", "Necklaces"].each do |category| %>
+              <div class="level-item">
+                <%= link_to category, products_path(category: category),
+                            class: "has-text-grey-darker has-text-weight-semibold is-uppercase #{'has-text-success' if params[:category] == category}" %>
+              </div>
+            <% end %>
+         <%# </div> %>
+        </div>
+
+        <div class="level-right">
+
+          <div class="level-item">
             <%= link_to 'ABOUT US', about_path, class: 'has-text-success' %>
+          </div>
 
-            <%= form_with url: products_path, method: :get, local: true, class: "field has-addons" do %>
-              <div class="field has-addons">
-
+          <div class="level-item">
+            <div class="field has-addons">
+              <%= form_with url: products_path, method: :get, local: true, class: "field has-addons" do %>
                 <div class="control">
                   <%= text_field_tag :query, params[:query],
                                     class: "input is-small",
@@ -92,11 +99,11 @@
                 <div class="control">
                   <%= submit_tag "Search", class: "button is-info" %>
                 </div>
-
-              </div>
-            <% end %>
-          </div>
-      </div>
+              <% end %>
+            </div>
+         </div>
+       </div>
+     </div>
 
       <%# Banner %>
       <section class="hero is-medium custom-background">
@@ -111,16 +118,16 @@
       <%= yield %>
 
       <footer class="footer">
-      <div class="content has-text-centered">
-        <p>
-          <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>.
-          The source code is licensed
-          <a href="https://opensource.org/license/mit">MIT</a>. The
-          website content is licensed
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//">CC BY NC SA 4.0</a>
-        </p>
-      </div>
-    </footer>
+        <div class="content has-text-centered">
+          <p>
+            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>.
+            The source code is licensed
+            <a href="https://opensource.org/license/mit">MIT</a>. The
+            website content is licensed
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//">CC BY NC SA 4.0</a>
+          </p>
+        </div>
+      </footer>
     </div>
   </body>
 </html>

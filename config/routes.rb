@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'customers/new'
-  get 'customers/create'
+  # get 'customers/new'
+  # get 'customers/create'
   get 'customers/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -30,8 +30,8 @@ Rails.application.routes.draw do
   get 'checkout', to: 'checkout#index'
 
   devise_for :customers, controllers: {
+    sessions: 'customers/sessions',
     registrations: 'customers/registrations'
   }
-
 
 end

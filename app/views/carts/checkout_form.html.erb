@@ -50,49 +50,49 @@
           <div class="field">
             <label class="label">First Name</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g Alex" name="first_name" value="<%= @customer.first_name %>">
+              <input class="input" type="text" placeholder="e.g Alex" name="first_name" value="">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Last Name</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g Smith" name="last_name" value="<%= @customer.last_name %>">
+              <input class="input" type="text" placeholder="e.g Smith" name="last_name" value="">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Email</label>
             <div class="control">
-              <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com" name="email" value="<%= @customer.email %>">
+              <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com" name="email" value="">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Phone</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g 587 222 7711" name="phone" value="<%= @customer.phone %>">
+              <input class="input" type="text" placeholder="e.g 587 222 7711" name="phone" value="">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Address</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g 111 Osborne St Unit 511" name="address" value="<%= @customer.address %>">
+              <input class="input" type="text" placeholder="e.g 111 Osborne St Unit 511" name="address" value="">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Postal Code</label>
             <div class="control">
-              <input class="input" type="text" placeholder="R3L 2G7" name="postal_code" value="<%= @customer.postal_code %>">
+              <input class="input" type="text" placeholder="R3L 2G7" name="postal_code" value="">
             </div>
           </div>
 
           <div class="field">
             <label class="label">City</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g Calgary" name="city" value="<%= @customer.city %>">
+              <input class="input" type="text" placeholder="e.g Calgary" name="city" value="">
             </div>
           </div>
 
@@ -102,7 +102,7 @@
               <div class="select">
                 <select name="province_id">
                   <option value="1">Alberta</option>
-                  <option value="2">British Columbia (BC)</option>
+                  <option value="2">British Columbia</option>
                   <option value="3">Manitoba</option>
                   <option value="4">Ontario</option>
                   <option value="5">Quebec</option>
@@ -141,21 +141,16 @@
   <div class="column">
     <%# Second column %>
     <div class="box">
-      <p class="title is-5">Order Summary</p><br>
+      <p class="title is-5">Order Summary</p>
+      <hr>
+
       <p class="subtitle is-4"><%= @cart.sum { |item| item["quantity"].to_i } %><strong> Items</strong> </p>
       <hr>
-      <p><strong>Subtotal :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
+      <p><strong>Subtotal :</strong><%= number_to_currency(@subtotal) %></p>
       <p><strong>Shipping :</strong> $0.00</p>
-      <p><strong>Estimated Tax :</strong>
-
-      <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
+      <p><strong>Estimated Tax :</strong><%= number_to_currency(@taxes) %></p>
       <hr>
-      <p class="subtitle is-3"><strong>Total :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
-    </div>
-
-    <%# Buttons %>
-    <div class="buttons are-medium">
-      <button class="button is-fullwidth">CHECKOUT</button>
+      <p class="subtitle is-3"><strong>Total :</strong> <%= number_to_currency(@total) %></p>
     </div>
 
   </div>

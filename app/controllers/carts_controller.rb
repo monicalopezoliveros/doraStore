@@ -1,24 +1,24 @@
 class CartsController < ApplicationController
-  # Mostrar el contenido del carrito
+  # Show cart contents
   def show
     @cart = session[:cart] || []
   end
 
-  # Agregar productos al carrito
+  # Add products to cart
   def add_to_cart
     product = Product.find(params[:product_id])
 
-    # Inicializar el carrito si está vacío
+    # Reset cart if empty
     session[:cart] ||= []
     cart = session[:cart]
 
-    # Verificar si el producto ya está en el carrito
+    # Check if the product is already in the cart
     item = cart.find { |i| i["product_id"] == product.id }
     if item
-      # Incrementar cantidad si ya existe
+      # Increase quantity if it already exists
       item["quantity"] += params[:quantity].to_i
     else
-      # Agregar nuevo producto
+      # Add new product
       cart << {
         "product_id" => product.id,
         "name" => product.name,
@@ -31,7 +31,7 @@ class CartsController < ApplicationController
     redirect_to cart_path
   end
 
-  # Actualizar cantidad de un producto en el carrito
+  # Update quantity of a product in the cart
   def update_quantity
     cart = session[:cart]
     item = cart.find { |i| i["product_id"] == params[:product_id].to_i }
@@ -46,7 +46,7 @@ class CartsController < ApplicationController
     redirect_to cart_path
   end
 
-  # Eliminar producto del carrito
+  # Remove product from cart
   def remove_item
     cart = session[:cart]
     cart.reject! { |i| i["product_id"] == params[:product_id].to_i }
@@ -57,11 +57,23 @@ class CartsController < ApplicationController
 
   def checkout_form
     @cart = current_cart
+
+    subtotal = @cart.sum { |item| item["price"].to_f * item["quantity"].to_i }
+
+    if current_customer
+      taxes = current_customer.calculate_taxes(subtotal)
+    else
+      taxes = 0
+    end
+
+    @subtotal = subtotal
+    @taxes = taxes
+    @total = subtotal + taxes
   end
 
   private
 
-  # Método para obtener el carrito actual
+  # Method to get the current cart
   def current_cart
     session[:cart] || []
   end

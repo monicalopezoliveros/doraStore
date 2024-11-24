@@ -18,4 +18,17 @@ class Customer < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  # Method for calculating taxes according to province
+  def calculate_taxes(subtotal)
+    gst_rate = province.gst.to_f
+    pst_rate = province.pst.to_f
+    hst_rate = province.hst.to_f
+
+    gst_amount = gst_rate > 0 ? (subtotal * gst_rate) : 0
+    pst_amount = pst_rate > 0 ? (subtotal * pst_rate) : 0
+    hst_amount = hst_rate > 0 ? (subtotal * hst_rate) : 0
+
+    gst_amount + pst_amount + hst_amount
+  end
 end

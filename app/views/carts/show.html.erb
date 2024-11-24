@@ -70,16 +70,10 @@
       <hr>
       <p><strong>Subtotal :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
       <p><strong>Shipping :</strong> $0.00</p>
-      <p><strong>Estimated Tax :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
       <hr>
-      <p class="subtitle is-3"><strong>Total :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
+      <p class="subtitle is-3"><strong>Subtotal :</strong> <%= number_to_currency(@cart.sum { |i| i["price"].to_f * i["quantity"].to_i }) %></p>
 
     </div>
-
-    <%# Buttons %>
-    <%# <div class="buttons are-medium">
-      <button class="button is-fullwidth">CHECKOUT</button>
-    </div> %>
 
     <div class="buttons are-medium">
       <%= link_to checkout_path do %>
