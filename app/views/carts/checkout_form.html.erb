@@ -8,7 +8,7 @@
         <p class="title is-5">Shipping Details</p>
         <p>If you are already a registered customer, please log in to enjoy a faster and easier payment experience.</p>
 
-        <%= form_with(url: cart_create_order_path(@cart), method: :post, local: true) do |form| %>
+        <%= form_with(url: create_order_cart_path, method: :post, local: true) do |form| %>
 
           <!-- Address -->
           <div class="field">
@@ -49,7 +49,7 @@
         <% end %>
       </div>
     <% else %>
-      <!-- Formulario para crear cliente si no está autenticado -->
+      <!-- Form to create client if not authenticated -->
       <div class="box" style="width: 700px" is-two-thirds>
         <%= form_with(model: @customer, url: customers_path, method: :post, local: true) do |form| %>
           <p class="title is-5">Create an Account</p>

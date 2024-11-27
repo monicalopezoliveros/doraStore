@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_customer! # Asegura que el cliente esté autenticado
+  before_action :authenticate_customer! # Ensures that the client is authenticated
 
   def create
     @cart = current_cart
@@ -11,12 +11,12 @@ class OrdersController < ApplicationController
       return
     end
 
-    # Comenzamos una transacción para crear la orden y sus detalles
+    # A transaction is started to create the order and its details.
     ActiveRecord::Base.transaction do
-      # Crear la orden (status inicial es "pending")
+      # Create the order (initial status is "pending")
       @order = @customer.orders.create!(status: :pending)
 
-      # Crear los detalles de la orden a partir del carrito
+      # Create order details from cart
       @cart.each do |item|
         product = Product.find(item["product_id"])
         @order.order_details.create!(
@@ -26,14 +26,22 @@ class OrdersController < ApplicationController
         )
       end
 
-      # Limpiar el carrito después de crear la orden
+      # Clear the cart after creating the order
       session[:cart] = []
 
-      # Redirigir al cliente a la página de la orden
+      # Redirect the customer to the order page
       redirect_to order_path(@order), notice: "Your order has been placed successfully!"
     rescue ActiveRecord::RecordInvalid => e
       flash[:alert] = "There was an issue with your order: #{e.message}"
-      render 'carts/checkout_form' # Redirige al formulario de checkout si algo falla
+      render 'carts/checkout_form' # Redirect to the checkout form if something goes wrong
     end
+  end
+
+  # Show order details
+  def show
+    @order = Order.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "Order not found."
+    redirect_to root_path
   end
 end
