@@ -7,35 +7,42 @@
       <div class="box" style="width: 700px" is-two-thirds>
         <p class="title is-5">Shipping Details</p>
         <p>If you are already a registered customer, please log in to enjoy a faster and easier payment experience.</p>
-        <%= form_with(model: @shipping_detail, url: checkout_path, method: :post, local: true) do |form| %>
+
+        <%= form_with(url: cart_create_order_path(@cart), method: :post, local: true) do |form| %>
+
+          <!-- Address -->
           <div class="field">
             <label class="label">Address</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g 111 Osborne St Unit 511" name="address" value="<%= current_customer.address %>">
+              <%= form.text_field :address, value: current_customer.address, placeholder: "e.g 111 Main St Unit 511", class: "input" %>
             </div>
           </div>
 
+          <!-- Postal Code -->
           <div class="field">
             <label class="label">Postal Code</label>
             <div class="control">
-              <input class="input" type="text" placeholder="R3L 2G7" name="postal_code" value="<%= current_customer.postal_code %>">
+              <%= form.text_field :postal_code, value: current_customer.postal_code, placeholder: "R3L 2G7", class: "input" %>
             </div>
           </div>
 
+          <!-- City -->
           <div class="field">
             <label class="label">City</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g Calgary" name="city" value="<%= current_customer.city %>">
+              <%= form.text_field :city, value: current_customer.city, placeholder: "e.g Calgary", class: "input" %>
             </div>
           </div>
 
+           <!-- Province -->
           <div class="field">
             <label class="label">Province</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g Calgary" name="city" value="<%= current_customer.province.name %>">
+              <%= form.text_field :province, value: current_customer.province.name, placeholder: "e.g Alberta", class: "input" %>
             </div>
           </div>
 
+          <!-- Submit Button -->
           <div class="control">
             <button class="button is-fullwidth" type="submit">Proceed with Payment</button>
           </div>
@@ -47,59 +54,67 @@
         <%= form_with(model: @customer, url: customers_path, method: :post, local: true) do |form| %>
           <p class="title is-5">Create an Account</p>
 
+           <!-- First Name -->
           <div class="field">
             <label class="label">First Name</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g Alex" name="first_name" value="">
+              <%= form.text_field :first_name, placeholder: "e.g Alex", class: "input" %>
             </div>
           </div>
 
+          <!-- Last Name -->
           <div class="field">
             <label class="label">Last Name</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g Smith" name="last_name" value="">
+              <%= form.text_field :last_name, placeholder: "e.g Smith", class: "input" %>
             </div>
           </div>
 
+          <!-- Email -->
           <div class="field">
             <label class="label">Email</label>
             <div class="control">
-              <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com" name="email" value="">
+              <%= form.email_field :email, placeholder: "e.g. alexsmith@gmail.com", class: "input" %>
             </div>
           </div>
 
+          <!-- Phone -->
           <div class="field">
             <label class="label">Phone</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g 587 222 7711" name="phone" value="">
+              <%= form.text_field :phone, placeholder: "e.g 587 222 7711", class: "input" %>
             </div>
           </div>
 
+          <!-- Address -->
           <div class="field">
             <label class="label">Address</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g 111 Osborne St Unit 511" name="address" value="">
+              <%= form.text_field :address, placeholder: "e.g 111 Osborne St Unit 511", class: "input" %>
             </div>
           </div>
 
+          <!-- Postal Code -->
           <div class="field">
             <label class="label">Postal Code</label>
             <div class="control">
-              <input class="input" type="text" placeholder="R3L 2G7" name="postal_code" value="">
+              <%= form.text_field :postal_code, placeholder: "R3L 2G7", class: "input" %>
             </div>
           </div>
 
+          <!-- City -->
           <div class="field">
             <label class="label">City</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g Calgary" name="city" value="">
+              <%= form.text_field :city, placeholder: "e.g Calgary", class: "input" %>
             </div>
           </div>
 
+          <!-- Province -->
           <div class="field">
             <label class="label">Province</label>
             <div class="control">
-              <div class="select">
+              <%# <div class="select">
                 <select name="province_id">
                   <option value="1">Alberta</option>
                   <option value="2">British Columbia</option>
@@ -112,24 +127,28 @@
                   <option value="9">New Brunswick</option>
                   <option value="10">Prince Edward Island</option>
                 </select>
-              </div>
+              </div> %>
+              <%= form.collection_select :province_id, Province.all, :id, :name, {}, { class: "select" } %>
             </div>
           </div>
 
+          <!-- Password -->
           <div class="field">
             <label class="label">Password</label>
             <div class="control">
-              <input class="input" type="password" name="password" placeholder="Create a password">
+              <%= form.password_field :password, placeholder: "Create a password", class: "input" %>
             </div>
           </div>
 
+          <!-- Confirm Password -->
           <div class="field">
             <label class="label">Confirm Password</label>
             <div class="control">
-              <input class="input" type="password" name="password_confirmation" placeholder="Confirm your password">
+              <%= form.password_field :password_confirmation, placeholder: "Confirm your password", class: "input" %>
             </div>
           </div>
 
+          <!-- Submit Button -->
           <div class="control">
             <button class="button is-fullwidth" type="submit">Create Account and Proceed with Payment</button>
           </div>

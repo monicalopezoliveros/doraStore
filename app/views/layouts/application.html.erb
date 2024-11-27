@@ -34,10 +34,11 @@
 
           <div class="level-item">
             <% if customer_signed_in? %>
-              <p class="subtitle is-5">Welcome <%= current_customer.first_name %>!</p>
-              <%= link_to 'Sign out', destroy_customer_session_path, method: :delete, data: { turbo: false }, class: 'button is-danger' %>
+              <p class="subtitle is-5">Welcome <%= current_customer.first_name %> ! </p>
+              <%= button_to 'Sign out', destroy_customer_session_path, method: :delete %>
+              <%# , class: "button is-success" %>
             <% else %>
-              <%= link_to 'Login', new_customer_session_path, class: 'button is-primary' %>
+              <%= button_to 'Login', new_customer_session_path %>
             <% end %>
           </div>
           <div class="level-item">
