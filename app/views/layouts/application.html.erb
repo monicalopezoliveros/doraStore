@@ -42,11 +42,11 @@
             <% end %>
           </div>
           <div class="level-item">
-            <a href="">
+            <%= link_to contact_path do %>
               <span class="icon">
                 <i class="fa-solid fa-location-dot has-text-success"></i>
               </span>
-            </a>
+            <% end %>
           </div>
 
           <div class="level-item">
@@ -98,11 +98,11 @@
               <%= form_with url: products_path, method: :get, local: true, class: "field has-addons" do %>
                 <div class="control">
                   <%= text_field_tag :query, params[:query],
-                                    class: "input is-small",
+                                    class: "input is-small has-background-white",
                                     placeholder: "Find product" %>
                 </div>
                 <div class="control">
-                  <%= submit_tag "Search", class: "button is-info" %>
+                  <%= submit_tag "Search", class: "button is-success" %>
                 </div>
               <% end %>
             </div>
@@ -121,6 +121,13 @@
       </section>
 
       <%= yield %>
+
+      <%= link_to "https://wa.me/14313749792?text=Hi%20Dora%20I%20like%20to%20to%20know%20more%20about%20your%20jewelry%20collection." do %>
+        <div class="whatsapp-button">
+          <img src="/assets/whatsapp.png" alt="WhatsApp" />
+        </div>
+      <% end %>
+
 
       <footer class="footer">
         <div class="content has-text-centered">
