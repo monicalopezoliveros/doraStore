@@ -47,4 +47,6 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:create, :show]
 
+  get 'contact', to: 'pages#contact', as: :contact
+
 end
