@@ -6,9 +6,8 @@
     <% if customer_signed_in? %>
       <div class="box" style="width: 700px" is-two-thirds>
         <p class="title is-5">Shipping Details</p>
-        <p>If you are already a registered customer, please log in to enjoy a faster and easier payment experience.</p>
 
-        <%= form_with(url: create_order_cart_path, method: :post, local: true) do |form| %>
+          <%= form_with(url: create_order_cart_path, method: :post, local: true) do |form| %>
 
           <!-- Address -->
           <div class="field">
@@ -114,20 +113,6 @@
           <div class="field">
             <label class="label">Province</label>
             <div class="control">
-              <%# <div class="select">
-                <select name="province_id">
-                  <option value="1">Alberta</option>
-                  <option value="2">British Columbia</option>
-                  <option value="3">Manitoba</option>
-                  <option value="4">Ontario</option>
-                  <option value="5">Quebec</option>
-                  <option value="6">Saskatchewan</option>
-                  <option value="7">Newfoundland and Labrador</option>
-                  <option value="8">Nova Scotia</option>
-                  <option value="9">New Brunswick</option>
-                  <option value="10">Prince Edward Island</option>
-                </select>
-              </div> %>
               <%= form.collection_select :province_id, Province.all, :id, :name, {}, { class: "select" } %>
             </div>
           </div>

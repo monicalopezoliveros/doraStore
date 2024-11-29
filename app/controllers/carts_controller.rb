@@ -62,15 +62,22 @@ class CartsController < ApplicationController
   end
 
   def checkout_form
+    if current_customer.nil?
+      flash[:alert] = "You must be logged in to proceed."
+      redirect_to new_customer_session_path and return
+    end
+
+    # Verificar si el cliente tiene la dirección completa
+    if current_customer.address.nil? || current_customer.city.nil? || current_customer.postal_code.nil? || current_customer.province.nil?
+      flash[:alert] = "Please complete your address information."
+      redirect_to edit_customer_path(current_customer) and return
+    end
+
     @cart = current_cart
 
     subtotal = @cart.sum { |item| item["price"].to_f * item["quantity"].to_i }
 
-    if current_customer
-      taxes = current_customer.calculate_taxes(subtotal)
-    else
-      taxes = 0
-    end
+    taxes = current_customer.calculate_taxes(subtotal)
 
     @subtotal = subtotal
     @taxes = taxes
