@@ -1,9 +1,62 @@
 <div class="columns is-centered">
+    <div class="column is-half">
+        <div class="container ">
+            <section class="section has-background-success-light">
+                <h1 class="subtitle is-3">Contact Us</h1>
+                <p class="subtitle">Feel free to send us a message!</p>
 
-    <div class="column is-three-fifths">
-        <h1 class="subtitle is-3">Contact Us</h1>
-        <div><%= @contact_page.content %></div>
-        <br>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14755.659097218699!2d-97.19145345550366!3d49.878904263514826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52ea7378e9852513%3A0x5866ac4923e5d48f!2sCF%20Polo%20Park!5e0!3m2!1sen!2sca!4v1732888079579!5m2!1sen!2sca" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <form action="/send_contact_message" method="post">
+                <!-- CSRF Token -->
+                <%= csrf_meta_tags %>
+
+                <!-- Nombre -->
+                <div class="field">
+                    <label class="label has-text-grey">Name</label>
+                    <div class="control">
+                    <input class="input has-background-white has-text-grey-light" type="text" name="name" placeholder="Your name" required>
+                    </div>
+                </div>
+
+                <!-- Correo Electrónico -->
+                <div class="field">
+                    <label class="label has-text-grey">Email</label>
+                    <div class="control">
+                    <input class="input has-background-white" type="email" name="email" placeholder="Your email address" required>
+                    </div>
+                </div>
+
+                <!-- Asunto -->
+                <div class="field">
+                    <label class="label has-text-grey">Subject</label>
+                    <div class="control">
+                    <input class="input has-background-white" type="text" name="subject" placeholder="Subject of your message" required>
+                    </div>
+                </div>
+
+                <!-- Mensaje -->
+                <div class="field">
+                    <label class="label has-text-grey">Message</label>
+                    <div class="control">
+                    <textarea class="textarea has-background-white" name="message" placeholder="Write your message here..." required></textarea>
+                    </div>
+                </div>
+
+                <!-- Botón de envío -->
+                <div class="buttons">
+                    <div class="control">
+                    <button class="button is-black">Send Message</button>
+                    </div>
+                </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <div class="column">
+        <div class="">
+            <%# <h1 class="subtitle is-3">Contact Us</h1> %><br>
+            <div><%= @contact_page.content %></div>
+            <br>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14755.659097218699!2d-97.19145345550366!3d49.878904263514826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52ea7378e9852513%3A0x5866ac4923e5d48f!2sCF%20Polo%20Park!5e0!3m2!1sen!2sca!4v1732888079579!5m2!1sen!2sca" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
     </div>
 </div
