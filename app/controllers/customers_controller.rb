@@ -1,25 +1,25 @@
 class CustomersController < ApplicationController
-  # Acción para mostrar el formulario de registro
+  # Action to display the registration form
   def new
     @customer = Customer.new
   end
 
-  # Acción para manejar la creación de un nuevo cliente
+  # Action to handle the creation of a new client
   def create
     @customer = Customer.new(customer_params)
 
     if @customer.save
-      # Aquí puedes redirigir a una página de éxito o al inicio de sesión
+      # Here you can redirect to a success page or login
       redirect_to root_path, notice: 'Cuenta creada exitosamente.'
     else
-      # Si no se guarda correctamente, se muestra el formulario nuevamente con errores
+      # If not saved correctly, the form is displayed again with errors
       render :new
     end
   end
 
   private
 
-  # Fuerte parámetros para garantizar que solo los campos permitidos sean enviados
+  # Strong parameters to ensure that only allowed fields are sent
   def customer_params
     params.require(:customer).permit(:first_name, :last_name, :email, :phone, :address, :postal_code, :city, :province_id, :password, :password_confirmation)
   end

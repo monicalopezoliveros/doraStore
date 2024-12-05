@@ -67,7 +67,7 @@ class CartsController < ApplicationController
       redirect_to new_customer_session_path and return
     end
 
-    # Verificar si el cliente tiene la dirección completa
+    # Vérifiez si le client a l'adresse complète
     if current_customer.address.nil? || current_customer.city.nil? || current_customer.postal_code.nil? || current_customer.province.nil?
       flash[:alert] = "Please complete your address information."
       redirect_to edit_customer_path(current_customer) and return
@@ -90,17 +90,17 @@ class CartsController < ApplicationController
 
   end
 
-  # Método para crear la orden
+  # Method to create the command
   def create_order
     @cart = current_cart
     @customer = current_customer
 
-    # Verificamos si el cliente está autenticado
+    # Check if the client is authenticated
     if @customer
       # Crear la orden
       order = @customer.orders.create(status: :pending) # Estado inicial 'pendiente'
 
-      # Crear los detalles de la orden a partir del carrito
+      # Create order details from cart
       @cart.each do |item|
         product = Product.find(item["product_id"])
         order.order_details.create!(
@@ -110,10 +110,10 @@ class CartsController < ApplicationController
         )
       end
 
-      # Limpiar el carrito después de crear la orden
+      # Clear the cart after creating the order
       session[:cart] = []
 
-      # Redirigir al cliente a una página de éxito o a la página de la orden
+      # Redirect the customer to a success page or order page
       redirect_to order_path(order), notice: "Your order has been placed successfully!"
     else
       flash[:alert] = "Please log in to complete your order."
